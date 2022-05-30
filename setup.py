@@ -7,7 +7,7 @@ with open("README.md", "r", encoding='utf-8') as f:
 
 setuptools.setup(
     name="nonebot_plugin_baidutranslate",
-    version="0.1.0",
+    version="0.1.1",
     author="Number_Sir",
     author_email="Number_Sir@126.com",
     keywords=["pip", "nonebot2", "nonebot", "nonebot_plugin"],
@@ -24,5 +24,5 @@ setuptools.setup(
     include_package_data=True,
     platforms="any",
     install_requires=['nonebot-adapter-onebot>=2.0.0-beta.1', 'nonebot2>=2.0.0-beta.1', 'httpx>=0.22.0'],
-    python_requires=">=3.7"
+    python_requires=">=3.7.3"
 )

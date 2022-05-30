@@ -57,3 +57,11 @@ x翻x [内容]
 <div align="left">
   <img src="https://user-images.githubusercontent.com/52584526/169520252-71343d82-b3fc-477f-a7d7-714405e160ba.png" width="500" />
 </div>
+
+## 更新日志
+> 2022-05-27 v0.1.0
+> - 添加了基础翻译功能
+>
+> 2022-05-30 v0.1.1
+> - 修改最低兼容版本到 Python 3.7.3 版本
+> 
