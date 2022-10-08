@@ -6,7 +6,7 @@ API 参考：https://fanyi-api.baidu.com/doc/21
 
 class BaiduBaseException(Exception):
     """基类，代码 52000 是成功代码"""
-    def __init__(self, code: str = "52000", msg: str = f"发生未知错误..."):
+    def __init__(self, code: str = "52000", msg: str = "发生未知错误..."):
         self.code = code
         self.msg = msg
 
