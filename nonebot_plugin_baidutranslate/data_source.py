@@ -44,7 +44,7 @@ async def translate_msg(_from_to, _query):
                 success = True
                 break
     if not success:
-        return f"QAQ，连接失败了...请重试..."
+        return "QAQ，连接失败了...请重试..."
 
     json_data = json_data.json()
     logger.debug(f"结果: {json_data}")
