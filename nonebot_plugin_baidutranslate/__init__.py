@@ -17,6 +17,12 @@ translate = on_regex(r"^(.*)?翻(.*?)\s(.*)?$", priority=5, block=True)
 async def _(reg_group: Tuple[Any, ...] = RegexGroup()):
     _query = reg_group[-1].strip()  # 翻译内容
     _from, _to = reg_group[0], reg_group[1]
+
+    # 消除指令前缀
+    command_start = (global_config.dict())['command_start']
+    if(len(_from) > 1 and _from[0] in command_start):
+        _from = _from[1:]
+
     if _from and _to:
         _from_to = [_from, _to]
     else:
