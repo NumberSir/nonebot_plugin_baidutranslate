@@ -25,7 +25,7 @@ nb plugin install nonebot_plugin_baidutranslate
 - 使用 pip
 
 ```
-pip install nonebot_plugin_baidutranslate
+pip install -U nonebot_plugin_baidutranslate
 ```
 
 ## 如何使用
@@ -47,6 +47,8 @@ salt = "xxx"   # 随机字符串
 
 ```
 x翻x [内容]
+
+(回复消息)x翻x
 ```
 
 ## 图片示例
@@ -59,9 +61,15 @@ x翻x [内容]
 </div>
 
 ## 更新日志
-> 2022-05-27 v0.1.0
-> - 添加了基础翻译功能
+> 2023-01-28 v0.2.0
+> - 修改最低兼容版本为 Python 3.8, 与 nonebot2.0.0rc3 一致
+> - 增加回复消息翻译功能
+> - 修改匹配翻译文本的bug
+> - 错误信息以聊天信息的方式发送
 >
 > 2022-05-30 v0.1.1
 > - 修改最低兼容版本到 Python 3.7.3 版本
 > 
+> 2022-05-27 v0.1.0
+> - 添加了基础翻译功能
+>
