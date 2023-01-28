@@ -66,6 +66,7 @@ x翻x [内容]
 > - 增加回复消息翻译功能
 > - 修改匹配翻译文本的bug
 > - 错误信息以聊天信息的方式发送
+> - 修复命令前缀引起参数缺少，判断翻译后的文本长度[@pull/5](https://github.com/NumberSir/nonebot_plugin_baidutranslate/pull/5)
 >
 > 2022-05-30 v0.1.1
 > - 修改最低兼容版本到 Python 3.7.3 版本

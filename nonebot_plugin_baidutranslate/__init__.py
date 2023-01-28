@@ -26,7 +26,7 @@ async def _(event: GroupMessageEvent, reg_group: Tuple[Any, ...] = RegexGroup())
 
     # 消除指令前缀
     command_start = (global_config.dict())['command_start']
-    if(len(_from) > 1 and _from[0] in command_start):
+    if len(_from) > 1 and _from[0] in command_start:
         _from = _from[1:]
 
     if _from and _to:
