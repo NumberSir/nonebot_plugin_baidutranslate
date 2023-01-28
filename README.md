@@ -60,6 +60,10 @@ x翻x [内容]
   <img src="https://user-images.githubusercontent.com/52584526/169520252-71343d82-b3fc-477f-a7d7-714405e160ba.png" width="500" />
 </div>
 
+<div align="left">
+  <img src="https://user-images.githubusercontent.com/52584526/215271556-2b800b02-298f-44f1-af1b-bda0a2d3653b.png" width="500" />
+</div>
+
 ## 更新日志
 > 2023-01-28 v0.2.0
 > - 修改最低兼容版本为 Python 3.8, 与 nonebot2.0.0rc3 一致
