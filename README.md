@@ -72,6 +72,14 @@ salt = "xxx"   # 随机字符串
   <img src="https://user-images.githubusercontent.com/52584526/215271556-2b800b02-298f-44f1-af1b-bda0a2d3653b.png" width="500" />
 </div>
 
+<div align="left">
+  <img src="https://user-images.githubusercontent.com/52584526/215284148-93d94ee7-d04a-4834-9ce1-4e0aeacaa4b6.png" width="500" />
+</div>
+
+<div align="left">
+  <img src="https://user-images.githubusercontent.com/52584526/215284152-8a0506fa-7719-4c86-a30e-c65d8f84db26.png" width="500" />
+</div>
+
 ## 更新日志
 > 2023-01-29 v0.3.0
 > - 添加“垂直领域翻译”与“语种识别”功能
