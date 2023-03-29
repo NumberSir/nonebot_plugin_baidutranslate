@@ -10,7 +10,7 @@ from nonebot import on_regex, on_command
 from nonebot.params import RegexGroup, CommandArg
 from nonebot.plugin import PluginMetadata
 from nonebot.exception import FinishedException
-from nonebot.adapters.onebot.v11 import GroupMessageEvent, Message
+from nonebot.adapters.onebot.v11 import MessageEvent, Message
 
 global_config = nonebot.get_driver().config
 plugin_config = Config(**global_config.dict())
@@ -20,7 +20,7 @@ field_translate = on_regex(r"^([\u4e00-\u9fa5][\u4e00-\u9fa5])领域([\u4e00-\u9
 language_recognize = on_command("语种识别", priority=5)
 
 @general_translate.handle()
-async def _(event: GroupMessageEvent, reg_group: Tuple[Any, ...] = RegexGroup()):
+async def _(event: MessageEvent, reg_group: Tuple[Any, ...] = RegexGroup()):
     if event.reply:
         query_ = event.reply.message.extract_plain_text().strip()
     else:
@@ -29,7 +29,7 @@ async def _(event: GroupMessageEvent, reg_group: Tuple[Any, ...] = RegexGroup())
     from_, to_ = reg_group[0], reg_group[1]
 
     if not from_ or not to_:
-        await general_translate.finish(f"指令打错啦！请输入“x翻x [内容]”，方括号不需要输入\n其中x可以为: {', '.join(GENERAL_LANGUAGES.keys())}", at_sender=True)
+        await general_translate.finish(f"指令打错啦！请输入“x翻x [内容]”，方括号不需要输入\n其中x可以为: {', '.join(GENERAL_LANGUAGES.keys())}")
 
     # 消除指令前缀
     command_start = (global_config.dict())['command_start']
@@ -37,7 +37,7 @@ async def _(event: GroupMessageEvent, reg_group: Tuple[Any, ...] = RegexGroup())
         from_ = from_[1:]
 
     if len(query_) > 2000:
-        await general_translate.finish("翻译过长！请不要超过2000字", at_sender=True)
+        await general_translate.finish("翻译过长！请不要超过2000字")
 
     async with httpx.AsyncClient() as client:
         try:
@@ -48,7 +48,7 @@ async def _(event: GroupMessageEvent, reg_group: Tuple[Any, ...] = RegexGroup())
         except FinishedException:
             pass
         except KeyError as e:
-            await general_translate.finish(f"指令打错啦！\n能翻译的语种只有: {', '.join(GENERAL_LANGUAGES.keys())}", at_sender=True)
+            await general_translate.finish(f"指令打错啦！\n能翻译的语种只有: {', '.join(GENERAL_LANGUAGES.keys())}")
         except Exception as e:
             if any((isinstance(e, _) for _ in EXCEPTIONS.values())):
                 await general_translate.finish(e.__str__())
@@ -56,7 +56,7 @@ async def _(event: GroupMessageEvent, reg_group: Tuple[Any, ...] = RegexGroup())
 
 
 @field_translate.handle()
-async def _(event: GroupMessageEvent, reg_group: Tuple[Any, ...] = RegexGroup()):
+async def _(event: MessageEvent, reg_group: Tuple[Any, ...] = RegexGroup()):
     if event.reply:
         query_ = event.reply.message.extract_plain_text().strip()
     else:
@@ -65,7 +65,7 @@ async def _(event: GroupMessageEvent, reg_group: Tuple[Any, ...] = RegexGroup())
     domain_, from_, to_ = reg_group[0], reg_group[1], reg_group[2]
 
     if not all((domain_, from_, to_)):
-        await field_translate.finish(f"指令打错啦！请输入“oo领域x翻x [内容]”，方括号不需要输入\n其中oo可以为{', '.join(DOMAINS_NAMES.keys())}\nx仅能为中, 英", at_sender=True)
+        await field_translate.finish(f"指令打错啦！请输入“oo领域x翻x [内容]”，方括号不需要输入\n其中oo可以为{', '.join(DOMAINS_NAMES.keys())}\nx仅能为中, 英")
 
     # 消除指令前缀
     command_start = (global_config.dict())['command_start']
@@ -73,18 +73,18 @@ async def _(event: GroupMessageEvent, reg_group: Tuple[Any, ...] = RegexGroup())
         from_ = from_[1:]
 
     if len(query_) > 2000:
-        await field_translate.finish("翻译过长！请不要超过2000字", at_sender=True)
+        await field_translate.finish("翻译过长！请不要超过2000字")
 
     async with httpx.AsyncClient() as client:
         try:
             result = await Translate(client=client).field_translate(
                 q=query_, from_=parse_lang(from_), to=parse_lang(to_), domain=parse_domain(domain_)
             )
-            await field_translate.finish(result, at_sender=True)
+            await field_translate.finish(result)
         except FinishedException:
             pass
         except KeyError as e:
-            await field_translate.finish(f"指令打错啦！\n能翻译的领域只有: {', '.join(DOMAINS_NAMES.keys())}\n能翻译的语种只有: 中, 英", at_sender=True)
+            await field_translate.finish(f"指令打错啦！\n能翻译的领域只有: {', '.join(DOMAINS_NAMES.keys())}\n能翻译的语种只有: 中, 英")
         except Exception as e:
             if any((isinstance(e, _) for _ in EXCEPTIONS.values())):
                 await field_translate.finish(e.__str__())
@@ -92,14 +92,14 @@ async def _(event: GroupMessageEvent, reg_group: Tuple[Any, ...] = RegexGroup())
 
 
 @language_recognize.handle()
-async def _(event: GroupMessageEvent, args: Message = CommandArg()):
+async def _(event: MessageEvent, args: Message = CommandArg()):
     if event.reply:
         query_ = event.reply.message.extract_plain_text().strip()
     else:
         query_ = args.extract_plain_text().strip()
 
     if not query_:
-        await general_translate.finish(f"指令打错啦！请输入“语种识别 [内容]”，方括号不需要输入\n其中能识别的语种只有{', '.join(RECOGNIZABLE_LANGUAGES.values())}", at_sender=True)
+        await general_translate.finish(f"指令打错啦！请输入“语种识别 [内容]”，方括号不需要输入\n其中能识别的语种只有{', '.join(RECOGNIZABLE_LANGUAGES.values())}")
 
     # 消除指令前缀
     command_start = (global_config.dict())['command_start']
@@ -107,14 +107,14 @@ async def _(event: GroupMessageEvent, args: Message = CommandArg()):
         query_ = query_[1:]
 
     if len(query_) > 2000:
-        await language_recognize.finish("翻译过长！请不要超过2000字", at_sender=True)
+        await language_recognize.finish("翻译过长！请不要超过2000字")
 
     async with httpx.AsyncClient() as client:
         try:
             result = await Translate(client=client).language_recognize(
                 q=query_
             )
-            await language_recognize.finish(result, at_sender=True)
+            await language_recognize.finish(result)
         except FinishedException:
             pass
         except Exception as e:
