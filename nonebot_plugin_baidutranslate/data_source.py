@@ -31,7 +31,7 @@ class Translate:
         json_data = response.json()
         if "error_code" not in json_data.keys():  # 通用翻译
             _result = json_data['trans_result'][0]
-            res = f"\n原文：{_result['src']}\n译文：{_result['dst']}"
+            res = f"原文：{_result['src']}\n译文：{_result['dst']}"
             return "QAQ，翻译出来太长了，请发的短一些吧..." if len(res) > 2000 else res
 
         if json_data["error_code"] == 0:  # 语种识别

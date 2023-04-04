@@ -81,6 +81,9 @@ salt = "xxx"   # 随机字符串
 </div>
 
 ## 更新日志
+> 2023-04-04 v0.3.2
+> - 修复回复时的空行[@issue/13](https://github.com/NumberSir/nonebot_plugin_baidutranslate/issues/13)
+> 
 > 2023-03-29 v0.3.1
 > - 现在私聊也可用（但不推荐）
 > 
